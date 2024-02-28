@@ -1,14 +1,21 @@
 #include "goodreadsdatapull.h"
 
-GoodreadsDataPull::GoodreadsDataPull(QObject *parent)
+GoodreadsDataPull::GoodreadsDataPull(QObject *parent, DataHandler &handler)
     : QObject{parent}
 {
     network_manager = new QNetworkAccessManager(this);
+
+    connect(network_manager, &QNetworkAccessManager::finished, this, &GoodreadsDataPull::BookSearchParse);
 }
 
-
-QList<Book> GoodreadsDataPull::Search(QString &search_string)
+void GoodreadsDataPull::BookSearchParse(QNetworkReply *reply)
 {
-    connect(network_manager, &QNetworkAccessManager::finished,
-             )
+
 }
+
+QList<Book> GoodreadsDataPull::Search(QString &search_string, DataHandler &handler)
+{
+
+    network_manager->get(QNetworkRequest(QUrl("http://qt-project.org")));
+}
+
